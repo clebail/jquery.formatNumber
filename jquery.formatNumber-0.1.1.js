@@ -36,7 +36,7 @@
 	$.fn.extend({
 		formatNumber: function(options){
 			var defaults = {
-				cents: ',',
+				thousandsSep: ',',
             	decPoint: '.',
 				decimals: 0,
 			}
@@ -61,18 +61,18 @@
 				}
 				//try{
 					values = $.trim(thiz.html());
-					console.log(values);
+					//console.log(values);
 					values += '';
 					x = values.split(o.decPoint);
-					console.log(x);
+					//console.log(x);
 					x1 = x[0];
-					console.log(x1);
+					//console.log(x1);
 					x2 = (x.length > 1 ? o.decPoint + round(x[1]) : (o.decimals > 0 ? o.decPoint + "0".repeat(o.decimals) : 0));
-					console.log(x2);
+					//console.log(x2);
 					var rgx = /(\d+)(\d{3})/;
 					while (rgx.test(x1)) {
-						x1 = x1.replace(rgx, '$1' + o.cents + '$2');
-						console.log(x1);
+						x1 = x1.replace(rgx, '$1' + o.thousandsSep + '$2');
+						//console.log(x1);
 					}
 					thiz.html(x1 + x2);
 				//}catch(e){
