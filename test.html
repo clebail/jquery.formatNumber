@@ -1,0 +1,16 @@
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>	
+		<script src="jquery.formatNumber-0.1.1.js"></script>	
+	</head>
+	<body>
+		<span>2932389423.567451</span> => <span class="number">2932389423.567451</span>
+		<script>
+			$('.number').formatNumber({
+				cents: ' ',
+				decimals: 2,
+				decPoint: '.',
+			});
+		</script>
+	</body>
+</html>

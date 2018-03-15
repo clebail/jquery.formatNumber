@@ -33,31 +33,46 @@
 	/* ===============
 	// $(Elem).formatNumber({opts});
 	// =============== */
-    $.fn.extend({
-        formatNumber: function(options){
-            var defaults = {
-				cents: '.',
-            	decimal: ','
-				}
-            
-            var o =  $.extend(defaults, options);
- 
-            return this.each(function() {
+	$.fn.extend({
+		formatNumber: function(options){
+			var defaults = {
+				cents: ',',
+            	decPoint: '.',
+				decimals: 0,
+			}
+			
+			var o =  $.extend(defaults, options);
+			
+			return this.each(function() {
 				/* ----Script Start---- */
                 var thiz = $(this), values, x, x1, x2;
+				var round = function(deci) {
+					if(o.decimals > 0) {
+						var value = (deci+'').substring(0, o.decimals);
+						var reste = (deci+'').substring(o.decimals, o.decimals + 1);
+						if(reste >= 5) {
+							value++;
+						}
+						
+						return (value+'').padEnd(o.decimals, '0');
+					}
+					
+					return 0;
+				}
 				//try{
 					values = $.trim(thiz.html());
-					//console.log(values);
+					console.log(values);
 					values += '';
-					x = values.split(o.cents);
-					//console.log(x);
+					x = values.split(o.decPoint);
+					console.log(x);
 					x1 = x[0];
-					//console.log(x1);
-					x2 = x.length > 1 ? o.cents + x[1] : '';
-					//console.log(x2);
+					console.log(x1);
+					x2 = (x.length > 1 ? o.decPoint + round(x[1]) : (o.decimals > 0 ? o.decPoint + "0".repeat(o.decimals) : 0));
+					console.log(x2);
 					var rgx = /(\d+)(\d{3})/;
 					while (rgx.test(x1)) {
-					x1 = x1.replace(rgx, '$1' + o.decimal + '$2');
+						x1 = x1.replace(rgx, '$1' + o.cents + '$2');
+						console.log(x1);
 					}
 					thiz.html(x1 + x2);
 				//}catch(e){
@@ -65,7 +80,7 @@
 				//}
 				
 				/* ----Script End---- */
-            });//return each
-        }//fn.extend
-    });
+			});//return each
+		}//fn.extend
+	});
 })(jQuery);
