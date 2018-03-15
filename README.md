@@ -5,20 +5,22 @@ jQuery plugin for formatting numbers, good for currencies. Option to choose the 
 
 Usage: `$('.number').formatNumber();`
 
-This will make `<span class="number">2932389423</span>` for e.g., be formatted into `<span class="number">29,323,894.23</span>`.
+This will make `<span class="number">2932389423.2312</span>` for e.g., be formatted into `<span class="number">2,932,389,423.23</span>`.
 
 ##Options
 
 
-	//produces 29,323,894.23 (e.g. US standard)
-	$('.number').formatNumber({
-	  cents: '.',
-	  decimal: ','
-	});
-	
-	//produces 29.323.894,23 (e.g. Brazil standard)
+	//produces 2,932,389,423.23 (e.g. US standard)
 	$('.number').formatNumber({
 	  cents: ',',
-	  decimal: '.'
+	  decimals: 2,
+	  decPoint: '.'
+	});
+	
+	//produces 2.932.389.423,23 (e.g. Brazil standard)
+	$('.number').formatNumber({
+	  cents: '.',
+	  decimals: 2,
+	  decPoints: ','
 	});
 	
